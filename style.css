@@ -93,9 +93,20 @@ li {
 }
 #formats {
   margin-top: 0.5rem;
-  font-size: 80%;
+  font-size: 20px;
   color: #fff;
 }
 #recordings {
   color: #fff;
+}
+#main{
+  font-family: 'Shadows Into Light', cursive;
+  color:#fff;
+  font-size:40px;
+}
+#mor{
+  color:#fff;
+  font-family: 'Cinzel', serif;
+  font-size:40px;
+  
 }

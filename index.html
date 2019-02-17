@@ -1,12 +1,20 @@
 <html>
     <title>Morale</title>
     <head>
-            <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://fonts.googleapis.com/css?family=Cinzel|Shadows+Into+Light" rel="stylesheet">   
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.0.52/wavesurfer.min.js"></script>    
     </head>
     <body>
-            <br><br><br><br><br><br><br><br><br><br><br><br>
+            <br><br>
+          
+            <h1 align="left" id="mor" >Morale Boost</h1>
+            
+            <br><br><br><br><br><br><br><br>
             <input type="file" accept="audio/*" capture id="recorder">
+            <br>
             <audio id="player" controls></audio>
+            <ol id="recordingsList1"></ol>
             <script>
             var recorder = document.getElementById('recorder');
             var player = document.getElementById('player');
@@ -15,6 +23,12 @@
                 var file = e.target.files[0];
                 // Do something with the audio file.
                 player.src =  URL.createObjectURL(file);
+                var li = document.createElement('li');
+                var upload = document.createElement('a');
+                upload.href="#";
+                upload.innerHTML = "Measure Confidence";
+                li.appendChild(upload)//add the upload link to li
+                recordingsList1.appendChild(li);
             });
             </script>  
         <div id="controls">
@@ -24,7 +38,8 @@
      </div>
      <div id="formats" >Format: start recording to see sample rate</div>
   	<h3 id="recordings">Recordings</h3>
-  	<ol id="recordingsList"></ol>
+    <ol id="recordingsList"></ol>
+    <div id="waveform"></div>
 
     <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
   	<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
