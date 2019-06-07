@@ -145,8 +145,8 @@ function createDownloadLink(blob) {
 
 	//upload link
 	var upload = document.createElement('a');
-	upload.href="#";
-	upload.innerHTML = "Measure Confidence";
+	//upload.href="#";
+	//upload.innerHTML = "Measure Confidence";
 	upload.addEventListener("click", function(event){
 		  var xhr=new XMLHttpRequest();
 		  xhr.onload=function(e) {

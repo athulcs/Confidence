@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <title>Morale</title>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Cinzel|Shadows+Into+Light" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+            <br><br>
+
+            <h1 align="left" id="mor" >Morale Boost</h1>
+            <br><br><br><br><br>
+            <form action="upload.php" method="post" enctype="multipart/form-data">
+            <input type="file" accept="audio/*" capture id="recorder" name="fileToUpload" id="fileToUpload">
+            <br>
+            <audio id="player" controls></audio>
+            <ol id="recordingsList1"></ol>
+            <script>
+            var recorder = document.getElementById('recorder');
+            var player = document.getElementById('player');
+            var path;
+            var flag=0;
+            recorder.addEventListener('change', function(e) {
+                var file = e.target.files[0];
+                // Do something with the audio file.
+                console.log(file);
+                path = URL.createObjectURL(file);
+                console.log(path);
+                player.src =  URL.createObjectURL(file);
+                song = player.src;
+                if(!flag){
+                  var li = document.createElement('li');
+                  var upload = document.createElement('input');
+                  upload.type="submit";
+                  upload.name= "submit";
+                  upload.value="Measure Confidence";
+                  li.appendChild(upload)//add the upload link to li
+                  recordingsList1.appendChild(li);
+                  flag=1;
+                }
+                else {
+                 recordingsList1.removeChild(li);
+                }
+                });
+
+            </script>
+            </form>
+            <!--div id="waveform"></div-->
+        <div id="controls">
+            <button id="recordButton">Record</button>
+            <button id="pauseButton" disabled>Pause</button>
+            <button id="stopButton" disabled>Stop</button>
+     </div>
+     <div id="formats" >Format: start recording to see sample rate</div>
+  	<h3 id="recordings">Recordings</h3>
+    <ol id="recordingsList"></ol>
+    <!--div id="waveform"></div-->
+
+    <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+  	<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+    <script src="js/app.js"></script>
+    <p> <a href="index.php">Logout</a></p>
+    </body>
+</html>

@@ -1,5 +1,6 @@
 
 <?php
+session_start();
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
@@ -24,13 +25,13 @@ if (file_exists($target_file)) {
     $uploadOk = 0;
 }
 // Check file size
-if ($_FILES["fileToUpload"]["size"] > 1000000) {
+if ($_FILES["fileToUpload"]["size"] > 5000000) {
     echo "Sorry, your file is too large.";
     echo "<br>";
     $uploadOk = 0;
 }
 // Allow certain file formats
-if($audioFileType != "wav" && $audioFileType != "mp3") {
+if($audioFileType != "wav" && $audioFileType != "mp3" && $audioFileType != "ogg") {
     echo "Sorry, only WAV and MP3 files are allowed.";
     echo "<br>";
     $uploadOk = 0;
@@ -42,7 +43,12 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.<br>";
+        $audioFile=basename( $_FILES["fileToUpload"]["name"]);
+//        echo exec("/home/athul/server/env/bin/python audioAnalysis.py featureExtractionFile -i uploads/$audioFile -mw 1.0 -ms 1.0 -sw 0.050 -ss 0.050 -o uploads/$audioFile 2>&1");
+        $out= exec("/home/athul/server/env/bin/python audioAnalysis.py classifyFile -i uploads/$audioFile --model randomforest --classifier model/ran 2>&1");
+       $_SESSION["output"] = $out;
+       header("Location: conf.php");
     } else {
         echo "Sorry, there was an error uploading your file.";
         echo "<br>";
